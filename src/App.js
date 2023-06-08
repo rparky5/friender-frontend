@@ -34,7 +34,7 @@ function App() {
 
   /**allows a user to update their own info when logged in */
   // async function update({username, lastName, email, firstName}) {
-  //   const userInfo = await JoblyApi.updateUser({lastName, email, firstName}, username);
+  //   const userInfo = await JrienderApi.updateUser({lastName, email, firstName}, username);
   //   setUser({ ...userInfo });
   // }
 

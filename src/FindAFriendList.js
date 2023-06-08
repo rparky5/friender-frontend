@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
-// import JoblyApi from "./api";
+// import JrienderApi from "./api";
 import FrienderApi from "./api";
 
 /** Renders a list of company cards, and a search form
@@ -46,7 +46,7 @@ function FindAFriendList() {
   async function submitSearch(params) {
     params = !params ? "" : { nameLike: params };
     try {
-      const res = await JoblyApi.getCompanies(params);
+      const res = await JrienderApi.getCompanies(params);
       setData({
         isLoading: false,
         companies: res,
