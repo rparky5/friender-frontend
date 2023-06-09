@@ -41,7 +41,7 @@ function RoutesList({ login, signup }) {
         <Route path="/profile" element={<Profile />} />
       </>
       )}
-      <Route path="*" element={<Navigate to="/404" />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
