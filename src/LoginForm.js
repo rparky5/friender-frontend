@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import userContext from "./userContext";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 /** Allows user to login
  *
@@ -16,8 +16,8 @@ import { Navigate } from "react-router-dom";
 
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({username:"", password: ""});
-  const { user } = useContext(userContext);
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -27,23 +27,17 @@ function LoginForm({ login }) {
     }));
   }
 
-  function handleError(error) {
-    console.log("error in handleErrors is...", error);
-    setErrors([...error]);
-  }
-
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      console.log("form data is", formData)
       await login(formData);
-      handleError([]);
-    } catch (error) {
-      handleError(error);
+      navigate("/");
+    } catch (err) {
+      setError(err);
     }
   }
 
-  if (user) return <Navigate to="/findafriend" />;
+  if (error) return <Navigate to={`/500`} />
 
   return (
     <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-white">
@@ -58,7 +52,7 @@ function LoginForm({ login }) {
             type="text"
             className="form-control"
             id="username"
-            value={formData?.username || ""}
+            value={formData.username}
             onChange={handleChange}
             aria-describedby="usernameHelp"
             aria-required="true"
@@ -74,7 +68,7 @@ function LoginForm({ login }) {
             type="password"
             className="form-control"
             id="password"
-            value={formData?.password || ""}
+            value={formData.password}
             onChange={handleChange}
             aria-describedby="passwordHelp"
             aria-required="true"
@@ -82,7 +76,7 @@ function LoginForm({ login }) {
           />
         </div>
 
-        {/* TODO: refactor this into seperate alert component */}
+        {/* TODO: refactor this into seperate alert component
         {errors.length > 0 && (
           <div className="alert alert-danger">
             {errors.map((error, index) => (
@@ -91,7 +85,7 @@ function LoginForm({ login }) {
               </p>
             ))}
           </div>
-        )}
+        )} */}
         <button className="btn btn-primary">Submit</button>
       </form>
     </div>

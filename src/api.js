@@ -50,6 +50,11 @@ class FrienderApi {
     return res.token;
   }
 
+  static async getUser(username) {
+    let res = await this.request(`auth/${username}`);
+    return res.user
+  }
+
   static async getPossibleFriends(username) {
     let res = await this.request(`findFriends/${username}`);
     return res.users

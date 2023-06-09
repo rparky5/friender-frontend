@@ -1,37 +1,62 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
 import NavBar from "./NavBar";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate } from "react-router-dom";
 import RoutesList from "./RoutesList";
-import backgroundImage from "./background-for-jobly.png";
+// import backgroundImage from "./background-for-jobly.png";
 import userContext from "./userContext";
 import FrienderApi from "./api";
 import jwt_decode from "jwt-decode";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useTokenLocalStorage();
+  //isLoading should be true
+  const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(function updateLocalStorage() {
+    token ? localStorage.setItem("token", token) : localStorage.removeItem("token");
+  }, [token]);
+
+  /**gets user object from API upon receipt of JWT token */
+  useEffect(() => {
+    async function getUserData() {
+      const { username } = jwt_decode(token);
+      FrienderApi.token = token;
+      try {
+        const userInfo = await FrienderApi.getUser(username);
+        setIsLoading(false);
+        setUser({ ...userInfo });
+      } catch (err) {
+        setError(err);
+      }
+    }
+    if (!token) {
+      setUser(null);
+    } else {
+      getUserData();
+    }
+  }, [token]);
 
   /**logs the current user out */
   function logout() {
     setIsLoading(false);
     setToken("");
-    setUser(null);
   }
 
   /**logs a user in with proper credentials */
   async function login(formData) {
     const newToken = await FrienderApi.login(formData);
-    //have both the token and the user info passed in, and then here we can
-    //assign the token to be held in state and set user to state
     setToken(newToken);
+    setIsLoading(true);
   }
 
   /**allows a new user to sign up */
-  async function signUp(formData) {
-    const newToken = await FrienderApi.signUpUser(formData);
+  async function signup(formData) {
+    const newToken = await FrienderApi.signup(formData);
     setToken(newToken);
+    setIsLoading(true);
   }
 
   /**allows a user to update their own info when logged in */
@@ -40,22 +65,7 @@ function App() {
   //   setUser({ ...userInfo });
   // }
 
-  /**gets user object from API upon receipt of JWT token */
-  useEffect(() => {
-    async function getUserData() {
-      if (token !== "") {
-        const { username } = jwt_decode(token);
-        FrienderApi.token = token;
-        const userInfo = await FrienderApi.getUserInfo(username);
-        setIsLoading(false);
-        setUser({ ...userInfo });
-      } else {
-        setIsLoading(false);
-      }
-    }
-    getUserData();
-  }, [token]);
-
+  if (error) return <Navigate to={`/404`} />;
   if (isLoading) return <h1 className="position-absolute top-50 start-50 text-white">Loading....</h1>;
 
   return (
@@ -63,7 +73,9 @@ function App() {
       <userContext.Provider value={{ user }}>
         <BrowserRouter>
           <NavBar logout={logout} />
-          <RoutesList login={login} signUp={signUp} update={update} />
+          <RoutesList
+            login={login}
+            signup={signup} />
         </BrowserRouter>
       </userContext.Provider>
     </div>
