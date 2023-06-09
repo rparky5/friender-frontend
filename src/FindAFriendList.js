@@ -22,6 +22,7 @@ function FindAFriendList() {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
     getFriends();
   }, []);
@@ -38,15 +39,16 @@ function FindAFriendList() {
     setFriends(copyOfFriends);
   }
 
-  async function likeUser(interactingUser) {
-    await FrienderApi.likeAUser(username, interactingUser);
+  async function likeUser() {
+    //add interacting user
+    // await FrienderApi.likeAUser(username, friends[0].username);
     removeInteractedFriend();
   }
 
-  async function dislikeUser(interactingUser) {
-    await FrienderApi.dislikeAUser(username, interactingUser);
-    removeInteractedFriend();
-  }
+  // async function dislikeUser(interactingUser) {
+  //   await FrienderApi.dislikeAUser(username, interactingUser);
+  //   removeInteractedFriend();
+  // }
 
   /** renderInfo receives nothing, returns instances of the CompanyCard component*/
   function renderFriendCard() {
@@ -62,7 +64,7 @@ function FindAFriendList() {
         <div>
           {renderFriendCard()}
           <button onClick={likeUser} className="btn btn-success">Yes</button>
-          <button onClick={dislikeUser} className="btn btn-danger">No</button>
+          {/* <button onClick={} className="btn btn-danger">No</button> */}
         </div>
       )}
       {friends.length === 0 && (
