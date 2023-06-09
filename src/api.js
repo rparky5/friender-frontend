@@ -1,4 +1,5 @@
 import axios from "axios";
+const FormData = require('form-data');
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -14,12 +15,12 @@ class FrienderApi {
   static token = "";
 
   /** base api request function */
-  static async request(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get", headers = { Authorization: `${FrienderApi.token}` }) {
     console.log("token in FrienderApi is", FrienderApi.token);
-    console.debug("API Call:", endpoint, data, method);
+    console.debug("API Call:", endpoint, data, method, headers);
 
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `${FrienderApi.token}` };
+    // const headers = { Authorization: `Bearer ${FrienderApi.token}` };
     console.log("headers are", headers);
     const params = method === "get" ? data : {};
 
@@ -33,11 +34,36 @@ class FrienderApi {
   }
 
   // Individual API routes
+  //add formDAta to signup where image is being sent
 
   /**creates a new user and returns a JWT Token */
   static async signup(user) {
-    let res = await this.request(`auth/register`, user, "post");
+    console.log("user in signup is", user );
+
+    let formData = new FormData();
+    console.log("newData is", formData);
+
+    for(const key in user){
+      if(key !== "photoUrl"){
+        if(user.hasOwnProperty(key)){
+          console.log("adding to form data now")
+          formData.append(`${key}`, `${user[key]}`)
+        }
+      }
+    }
+    formData.append("photoUrl", user.photoUrl);
+    console.log("formData in signup is", formData);
+    console.log("formData username is", formData.get("username"));
+
+    // boundary=${formData._boundary}
+    let headers = {
+      "Content-Type": `multipart/form-data`,
+    }
+
+    let res = await this.request(`auth/register`, formData, "post", headers);
+    console.log("res is", res)
     this.token = res.token;
+    //return user object as well as token
     return res.token;
   }
 
@@ -78,7 +104,7 @@ class FrienderApi {
 
   /** requires username, interactingUser like {viewedUser, didLike} */
   static async likeAUser(username, interactingUser) {
-    let res = await this.request(`matches/${username}`, {interactingUser: interactingUser, didLike: true}, "post");
+    let res = await this.request(`matches/${username}`, {viewedUser: interactingUser, didLike: true}, "post");
     return res.interaction
   }
 

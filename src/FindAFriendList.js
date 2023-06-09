@@ -22,6 +22,7 @@ function FindAFriendList() {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
     getFriends();
   }, []);
@@ -38,15 +39,16 @@ function FindAFriendList() {
     setFriends(copyOfFriends);
   }
 
-  async function likeUser(interactingUser) {
-    await FrienderApi.likeAUser(username, interactingUser);
+  async function likeUser() {
+    //add interacting user
+    // await FrienderApi.likeAUser(username, friends[0].username);
     removeInteractedFriend();
   }
 
-  async function dislikeUser(interactingUser) {
-    await FrienderApi.dislikeAUser(username, interactingUser);
-    removeInteractedFriend();
-  }
+  // async function dislikeUser(interactingUser) {
+  //   await FrienderApi.dislikeAUser(username, interactingUser);
+  //   removeInteractedFriend();
+  // }
 
   /** renderInfo receives nothing, returns instances of the CompanyCard component*/
   function renderFriendCard() {
@@ -63,7 +65,17 @@ function FindAFriendList() {
   return (
     <div>
       <h1 className="text-dark">Find-A-Friend!</h1>
+<<<<<<< HEAD
       {friends.length > 0 && renderFriendCard()}
+=======
+      {friends.length > 0 &&(
+        <div>
+          {renderFriendCard()}
+          <button onClick={likeUser} className="btn btn-success">Yes</button>
+          {/* <button onClick={} className="btn btn-danger">No</button> */}
+        </div>
+      )}
+>>>>>>> eb854776c01ee41bc234237f8057bf5cf529106a
       {friends.length === 0 && (
         <h3 className="text-dark col-6 col mx-auto position-absolute start-50 translate-middle">
           No friends in your area to display!

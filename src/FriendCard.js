@@ -10,18 +10,19 @@ import "./FriendCard.css";
  * -None
  *
  * CompanyDetails -> CompanyCard -> {Link}
+ *    px-2 py-2
  */
 
 function FriendCard({ friend }) {
-
+  console.log("friend is", friend)
   return (
     <div className="col-sm-9 mx-auto container p-3 my-3 text-left friend-card bg-white">
      {friend.photoUrl !== "" && (
-          <div className="image-container">
+          <div className="">
             <img
               src={friend.photoUrl}
               alt="profile picture"
-              className="width:8.5rem px-2 py-2"
+              className="img-thumbnail image-size"
             />
           </div>
         )}

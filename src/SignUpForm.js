@@ -28,6 +28,7 @@ function SignUpForm({ signup }) {
     radius:'',
     photoUrl:''
   });
+  console.log("formdata upon loading initially is", formData);
 
   function handleError(error) {
     console.log("error in handleErrors is...", error);
@@ -35,10 +36,21 @@ function SignUpForm({ signup }) {
   }
 
   function handleChange(evt) {
+    console.log("formdata in handlechange is", formData)
+
     const { name, value } = evt.target;
     setFormData((fData) => ({
       ...fData,
       [name]: value,
+    }));
+  }
+
+  function handleFileChange(evt) {
+
+    const file = evt.target.files[0];
+    setFormData((fData) => ({
+      ...fData,
+      photoUrl: file,
     }));
   }
 
@@ -194,8 +206,8 @@ function SignUpForm({ signup }) {
             type="file"
             className="form-control"
             id="photoUrl"
-            value={formData?.photoUrl || ""}
-            onChange={handleChange}
+            value={""}
+            onChange={handleFileChange}
             aria-describedby="photoUrlHelp"
             aria-required="true"
           />

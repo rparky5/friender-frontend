@@ -9,3 +9,8 @@
     top: 0;
     right: 0;
   }
+
+  .image-size {
+    width: 400px;
+    height: 500px;
+  }
