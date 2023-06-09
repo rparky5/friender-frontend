@@ -70,7 +70,7 @@ function App() {
 
   return (
     <div className="App">
-      <userContext.Provider value={{ user }}>
+      <userContext.Provider value={ user }>
         <BrowserRouter>
           <NavBar logout={logout} />
           <RoutesList
