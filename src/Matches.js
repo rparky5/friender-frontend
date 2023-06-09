@@ -72,7 +72,7 @@ function Matches(){
     <div className="row">
       <div className="col-lg-3">
         {/* Content for the left side */}
-        {getMatches()}
+        {/* {getMatches()} */}
       </div>
       <div className="col-lg-9">
         {/* Content for the right side */}

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./FriendCard.css";
 
 /** presentational card that will show info for one company

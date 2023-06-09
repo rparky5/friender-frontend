@@ -45,11 +45,12 @@ class FrienderApi {
     for(const key in user){
       if(key !== "photoUrl"){
         if(user.hasOwnProperty(key)){
+          console.log("adding to form data now")
           formData.append(key, user[key])
         }
       }
     }
-    formData.append("photoUrl", user[photoUrl]);
+    formData.append("photoUrl", user.photoUrl);
     console.log("formData in signup is", formData);
 
     let headers = {
@@ -99,8 +100,14 @@ class FrienderApi {
   }
 
   /** requires username, interactingUser like {viewedUser, didLike} */
-  static async likeOrDislikeUser(username, interactingUser) {
-    let res = await this.request(`matches/${username}`, interactingUser, "post");
+  static async likeAUser(username, interactingUser) {
+    let res = await this.request(`matches/${username}`, {interactingUser, didLike: true}, "post");
+    return res.interaction
+  }
+
+  /** requires username, interactingUser like {viewedUser, didLike} */
+  static async dislikeAUser(username, interactingUser) {
+    let res = await this.request(`matches/${username}`, {interactingUser, didLike: false}, "post");
     return res.interaction
   }
 
