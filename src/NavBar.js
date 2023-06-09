@@ -30,10 +30,10 @@ function NavBar({ logout }) {
         </NavLink>
         {user ? (
           <div className="navbar-nav mr-auto">
-            <NavLink to="/companies" className="nav-link">
+            <NavLink to="/findafriend" className="nav-link">
               Find-A-Friend
             </NavLink>
-            <NavLink to="/jobs" className="nav-link">
+            <NavLink to="/matches" className="nav-link">
               Matches
             </NavLink>
             <NavLink to="/profile" className="nav-link">

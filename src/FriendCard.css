@@ -1,0 +1,11 @@
+.friend-card {
+    position: relative;
+    transition: box-shadow 0.3s;
+    /* width: 65%; */
+  }
+
+  .image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }

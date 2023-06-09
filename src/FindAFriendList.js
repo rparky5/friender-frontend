@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import CompanyCard from "./CompanyCard";
-import SearchForm from "./SearchForm";
+import FriendCard from "./FriendCard";
+// import SearchForm from "./SearchForm";
 // import JrienderApi from "./api";
 import FrienderApi from "./api";
 
@@ -21,17 +21,17 @@ import FrienderApi from "./api";
 function FindAFriendList() {
   const [data, setData] = useState({
     isLoading: true,
-    companies: [],
+    friends: [],
   });
 
   /**
    * get an array of all the companies, then updates data state
   */
  async function getFriends() {
-   const companies = await FrienderApi.getFriends();
+   const friends = await FrienderApi.getFriends();
    setData({
      isLoading: false,
-     companies: companies,
+     friends: friends.users,
     });
   }
 
@@ -41,40 +41,41 @@ function FindAFriendList() {
   }, []);
 
   /** Big changes here, no params being passed in, no form down below to search,
-   * this function just runs and pulls all the eligible friends
+   * this function just runs and pulls all the eligible friends and maps over
+   *  them to create a bunch of Friend cards
   */
-  async function submitSearch(params) {
-    params = !params ? "" : { nameLike: params };
-    try {
-      const res = await JrienderApi.getCompanies(params);
-      setData({
-        isLoading: false,
-        companies: res,
-      });
-    } catch (err) {
-      window.alert("there was an error with your search");
-      return;
-    }
-  }
+  // async function submitSearch(params) {
+  //   params = !params ? "" : { nameLike: params };
+  //   try {
+  //     const res = await JrienderApi.getCompanies(params);
+  //     setData({
+  //       isLoading: false,
+  //       companies: res,
+  //     });
+  //   } catch (err) {
+  //     window.alert("there was an error with your search");
+  //     return;
+  //   }
+  // }
 
   if (data.isLoading) return <h1>Loading....</h1>;
 
   /** renderInfo receives nothing, returns instances of the CompanyCard component*/
-  function renderCompanyCards() {
-    return data.companies.map((company) => (
-      <CompanyCard key={company.handle} company={company} />
+  function renderFriendCards() {
+    return data.friends.map((friend) => (
+      <FriendCard key={friend.username} friend={friend} />
     ));
   }
 
   return (
     <div>
+      <h1 className="text-dark">Find-A-Friend!</h1>
       <div>
-        <SearchForm submitSearch={submitSearch} />
-        {renderCompanyCards()}
+        {renderFriendCards()}
       </div>
-      {data.companies.length < 1 && (
+      {data.friends.length < 1 && (
         <h3 className="text-white col-6 col mx-auto position-absolute start-50 translate-middle">
-          Sorry no results were found!
+          Sorry no friends were found!
         </h3>
       )}
     </div>
