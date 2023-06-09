@@ -23,6 +23,8 @@ function App() {
   /**logs a user in with proper credentials */
   async function login(formData) {
     const newToken = await FrienderApi.login(formData);
+    //have both the token and the user info passed in, and then here we can
+    //assign the token to be held in state and set user to state
     setToken(newToken);
   }
 
