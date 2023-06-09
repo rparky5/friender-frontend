@@ -20,7 +20,7 @@ import ServerError from "./SeverError";
  * App -> RoutesList
  */
 function RoutesList({ login, signup }) {
-  const { user } = useContext(userContext);
+  const user = useContext(userContext);
 
   return (
     <Routes>
