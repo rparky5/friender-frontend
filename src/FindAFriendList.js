@@ -65,9 +65,6 @@ function FindAFriendList() {
   return (
     <div>
       <h1 className="text-dark">Find-A-Friend!</h1>
-<<<<<<< HEAD
-      {friends.length > 0 && renderFriendCard()}
-=======
       {friends.length > 0 &&(
         <div>
           {renderFriendCard()}
@@ -75,7 +72,6 @@ function FindAFriendList() {
           {/* <button onClick={} className="btn btn-danger">No</button> */}
         </div>
       )}
->>>>>>> eb854776c01ee41bc234237f8057bf5cf529106a
       {friends.length === 0 && (
         <h3 className="text-dark col-6 col mx-auto position-absolute start-50 translate-middle">
           No friends in your area to display!
