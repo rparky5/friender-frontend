@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./Homepage.css";
+// import "./Homepage.css";
 import { Link } from "react-router-dom";
 import userContext from "./userContext";
 /** landing page w/conditional rendering
@@ -16,13 +16,13 @@ function Homepage() {
 
   return (
     <div className="position-absolute top-50 start-50 translate-middle">
-      <h1 className="text-center text-white text-shadow">Jobly</h1>
+      <h1 className="text-center text-white text-shadow">Friender</h1>
       <h4 className="text-center text-white">
         All the  job-- **friends** in one, convenient place.
       </h4>
       {user && (
         <h2 className="text-white text-center">
-          Welcome Back {user.firstName}!
+          Welcome Back, {user.firstName}!
         </h2>
       )}
       {!user && (

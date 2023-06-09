@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import SearchForm from "./SearchForm";
+import { useState, useEffect, useContext } from "react";
+// import { Navigate } from "react-router-dom";
+// import SearchForm from "./SearchForm";
 import FrienderApi from "./api";
 import userContext from "./userContext";
 
@@ -77,7 +77,7 @@ function Matches(){
       <div className="col-lg-9">
         {/* Content for the right side */}
         {getMessages()}
-        {messageComponents.length < 1 && <h3>A space for messages...</h3>   }
+        {/* {messageComponents.length < 1 && <h3>A space for messages...</h3>   } */}
       </div>
     </div>
   </div>

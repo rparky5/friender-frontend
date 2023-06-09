@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import userContext from "./userContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /** Sign up as a new user
  *
@@ -15,11 +14,20 @@ import { Navigate, useNavigate } from "react-router-dom";
  */
 
 //TODO: see feedback in LoginForm
-function SignUpForm({ signUp }) {
-  const [formData, setFormData] = useState({});
+function SignUpForm({ signup }) {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
-
-  const { user } = useContext(userContext);
+  const [formData, setFormData] = useState({
+    username:'',
+    password:'',
+    firstName:'',
+    lastName:'',
+    email:'',
+    hobbies:'',
+    zipCode:'',
+    radius:'',
+    photoUrl:''
+  });
 
   function handleError(error) {
     console.log("error in handleErrors is...", error);
@@ -37,14 +45,13 @@ function SignUpForm({ signUp }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await signUp(formData);
+      await signup(formData);
+      navigate("/");
       setErrors([]);
     } catch (error) {
       handleError(error);
     }
   }
-
-  if (user) return <Navigate to="/findafriend" />;
 
   return (
     <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-white">

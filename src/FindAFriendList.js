@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+// import { Navigate } from "react-router-dom";
+import userContext from "./userContext";
 import FriendCard from "./FriendCard";
 // import SearchForm from "./SearchForm";
 // import JrienderApi from "./api";
@@ -19,23 +20,16 @@ import FrienderApi from "./api";
  */
 
 function FindAFriendList() {
-  const [data, setData] = useState({
-    isLoading: true,
-    friends: [],
-  });
+  const { username } = useContext(userContext);
+  const [friends, setFriends] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  /**
-   * get an array of all the companies, then updates data state
-  */
- async function getFriends() {
-   const friends = await FrienderApi.getFriends();
-   setData({
-     isLoading: false,
-     friends: friends.users,
-    });
+  async function getFriends() {
+    const friends = await FrienderApi.getPossibleFriends(username);
+    setFriends(friends);
+    setIsLoading(false);
   }
 
-  /** useEffect runs our getCompanies function*/
   useEffect(() => {
     getFriends();
   }, []);
@@ -58,22 +52,23 @@ function FindAFriendList() {
   //   }
   // }
 
-  if (data.isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
 
   /** renderInfo receives nothing, returns instances of the CompanyCard component*/
   function renderFriendCards() {
-    return data.friends.map((friend) => (
-      <FriendCard key={friend.username} friend={friend} />
-    ));
+    // return friends.map((friend) => (
+    //   <FriendCard key={friend.username} friend={friend} />
+    // ));
+    return <h1>Friend Cards</h1>
   }
 
   return (
     <div>
       <h1 className="text-dark">Find-A-Friend!</h1>
       <div>
-        {renderFriendCards()}
+        {friends.length > 0 && renderFriendCards()}
       </div>
-      {data.friends.length < 1 && (
+      {friends.length === 0 && (
         <h3 className="text-white col-6 col mx-auto position-absolute start-50 translate-middle">
           Sorry no friends were found!
         </h3>

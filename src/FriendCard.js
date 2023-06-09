@@ -21,15 +21,14 @@ function FriendCard({ friend }) {
           <div className="image-container">
             <img
               src={friend.photoUrl}
-              alt="friend-pic"
+              alt="profile picture"
               className="width:8.5rem px-2 py-2"
             />
           </div>
         )}
         <h2 className="company-title text-dark">{friend.username}</h2>
         <h3 className="text-dark">{friend.firstName} {friend.lastName}</h3>
-        <h5 className="text-dark">{friend.zipCode}</h5>
-        <p className="text-dark">{friend.hobbies}</p>
+        <p className="text-dark">Hobbies: {friend.hobbies}</p>
     </div>
   );
 }
