@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import userContext from "./userContext";
 
 /** global navigation bar, renders different NavLinks depending on if
@@ -12,7 +12,8 @@ import userContext from "./userContext";
  * App -> JobCardList -> {NavLink*4 if logged in OR NavLink*2 if not}
  */
 function NavBar({ logout }) {
-  const { user } = useContext(userContext);
+  const user = useContext(userContext);
+  const navigate = useNavigate();
 
   function handleLogout() {
     logout();

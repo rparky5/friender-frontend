@@ -12,7 +12,7 @@ import userContext from "./userContext";
  */
 
 function Homepage() {
-  const { user } = useContext(userContext);
+  const user = useContext(userContext);
 
   return (
     <div className="position-absolute top-50 start-50 translate-middle">
