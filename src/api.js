@@ -101,13 +101,13 @@ class FrienderApi {
 
   /** requires username, interactingUser like {viewedUser, didLike} */
   static async likeAUser(username, interactingUser) {
-    let res = await this.request(`matches/${username}`, {interactingUser, didLike: true}, "post");
+    let res = await this.request(`matches/${username}`, {interactingUser: interactingUser, didLike: true}, "post");
     return res.interaction
   }
 
   /** requires username, interactingUser like {viewedUser, didLike} */
   static async dislikeAUser(username, interactingUser) {
-    let res = await this.request(`matches/${username}`, {interactingUser, didLike: false}, "post");
+    let res = await this.request(`matches/${username}`, {interactingUser: interactingUser, didLike: false}, "post");
     return res.interaction
   }
 

@@ -66,7 +66,7 @@ function FindAFriendList() {
         </div>
       )}
       {friends.length === 0 && (
-        <h3 className="text-white col-6 col mx-auto position-absolute start-50 translate-middle">
+        <h3 className="text-dark col-6 col mx-auto position-absolute start-50 translate-middle">
           No friends in your area to display!
         </h3>
       )}

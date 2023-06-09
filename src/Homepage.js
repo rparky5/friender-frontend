@@ -16,12 +16,12 @@ function Homepage() {
 
   return (
     <div className="position-absolute top-50 start-50 translate-middle">
-      <h1 className="text-center text-white text-shadow">Friender</h1>
-      <h4 className="text-center text-white">
+      <h1 className="text-center text-dark text-shadow">Friender</h1>
+      <h4 className="text-center text-dark">
         All the  job-- **friends** in one, convenient place.
       </h4>
       {user && (
-        <h2 className="text-white text-center">
+        <h2 className="text-dark text-center">
           Welcome Back, {user.firstName}!
         </h2>
       )}

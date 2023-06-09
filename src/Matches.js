@@ -60,7 +60,7 @@ function Matches(){
     })
   }
 
-  if (isLoading) return <h1 className="position-absolute top-50 start-50 text-white">Loading....</h1>;
+  if (isLoading) return <h1 className="position-absolute top-50 start-50 text-dark">Loading....</h1>;
     //Matches left side
 
     //Messages right side
