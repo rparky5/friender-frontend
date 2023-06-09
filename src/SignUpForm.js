@@ -54,8 +54,8 @@ function SignUpForm({ signup }) {
   }
 
   return (
-    <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-white">
-      <h2 className="text-white">Sign Up</h2>
+    <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-dark">
+      <h2 className="text-dark">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">

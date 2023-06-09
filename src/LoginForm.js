@@ -40,9 +40,9 @@ function LoginForm({ login }) {
   if (error) return <Navigate to={`/500`} />
 
   return (
-    <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-white">
+    <div className="col-4 mx-auto position-absolute top-50 start-50 translate-middle text-dark">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="text-dark">
         <div className="mb-3">
           <label htmlFor="username" className="form-label">
             Username
