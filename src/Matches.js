@@ -41,7 +41,6 @@ function Matches(){
     async function getMatches(){
       if(isLoading) {
         const allMatches = await FrienderApi.getUserMatches(username);
-        console.log("allmatches is", allMatches)
         setMatches(allMatches);
         setIsLoading(false);
       }

@@ -54,7 +54,6 @@ function App() {
 
   /**allows a new user to sign up */
   async function signup(formData) {
-    console.log("formData inside signup is>,", formData);
     const newToken = await FrienderApi.signup(formData);
     setToken(newToken);
     setIsLoading(true);

@@ -28,16 +28,12 @@ function SignUpForm({ signup }) {
     radius:'',
     photoUrl:''
   });
-  console.log("formdata upon loading initially is", formData);
 
   function handleError(error) {
-    console.log("error in handleErrors is...", error);
     setErrors([...error]);
   }
 
   function handleChange(evt) {
-    console.log("formdata in handlechange is", formData)
-
     const { name, value } = evt.target;
     setFormData((fData) => ({
       ...fData,

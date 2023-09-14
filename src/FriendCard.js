@@ -14,7 +14,6 @@ import "./FriendCard.css";
  */
 
 function FriendCard({ friend }) {
-  console.log("friend is", friend)
   return (
     <div className="col-sm-9 mx-auto container p-3 my-3 text-left friend-card bg-white">
      {friend.photoUrl !== "" && (
